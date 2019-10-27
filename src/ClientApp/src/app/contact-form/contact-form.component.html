@@ -1,0 +1,66 @@
+<div class="container pt-4">
+  <form #contactForm="ngForm" (submit)="submitForm(contactForm)">
+    <!-- FirstName -->
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': contactForm.submitted && firstName.invalid }" required />
+      <div *ngIf="contactForm.submitted && firstName.invalid" class="invalid-feedback">
+        <div *ngIf="firstName.errors.required">First Name is required</div>
+      </div>
+    </div>
+
+    <!-- LastName -->
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': contactForm.submitted && lastName.invalid }" required />
+      <div *ngIf="contactForm.submitted && lastName.invalid" class="invalid-feedback">
+        <div *ngIf="lastName.errors.required">Last Name is required</div>
+      </div>
+    </div>
+
+    <!-- Gender -->
+    <div class="form-group">
+      <div class="custom-control custom-radio">
+        <input id="male" type="radio" class="custom-control-input" value="1" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
+        <label class="custom-control-label" for="male">Male</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input id="female" type="radio" class="custom-control-input" value="0" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
+        <label class="custom-control-label" for="female">Female</label>
+      </div>
+      <div *ngIf="contactForm.submitted && gender.invalid" class="invalid-feedback d-block">
+        <div *ngIf="gender.errors.required">Gender is required</div>
+      </div>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="model.dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" [ngClass]="{ 'is-invalid': contactForm.submitted && dateOfBirth.invalid }" required />
+      <div *ngIf="contactForm.submitted && dateOfBirth.invalid" class="invalid-feedback">
+        <div *ngIf="dateOfBirth.errors.required">Date of Birth is required</div>
+      </div>
+    </div>
+
+    <!-- Country Code -->
+    <div class="form-group">
+      <label for="countryCode">Country:</label>
+      <select class="form-control" id="countryCode" [(ngModel)]="model.countryCode" name="countryCode" #countryCode="ngModel" [ngClass]="{ 'is-invalid': contactForm.submitted && countryCode.invalid }" required>
+        <option *ngFor="let c of (countries | async)" [value]="c.code">{{c.name}}</option>
+      </select>
+      <div *ngIf="contactForm.submitted && countryCode.invalid" class="invalid-feedback">
+        <div *ngIf="countryCode.errors.required">Country is required</div>
+      </div>
+    </div>
+
+    <!-- Is Student -->
+    <div class="form-group">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="isStudent" [(ngModel)]="model.isStudent" name="isStudent" #isStudent="ngModel" />
+        <label class="custom-control-label" for="isStudent">Is Student</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button> <!--[disabled]="!contactForm.form.valid"-->
+</form>
+</div>
