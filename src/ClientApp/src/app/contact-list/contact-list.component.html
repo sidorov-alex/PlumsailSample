@@ -1,6 +1,11 @@
 <div class="component pt-4">
 
-  <table class="table table-stripped">
+  <div class="form-group has-search">
+    <span class="fa fa-search form-control-feedback"></span>
+    <input type="text" class="form-control" placeholder="Search by name" (input)="onSearchChange($event.target.value)">
+  </div>
+
+  <table class="table table-stripped mt-4">
     <thead>
       <tr>
         <th>First Name</th>
@@ -12,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of contacts">
+      <tr *ngFor="let item of filteredContacts">
         <td>{{item.firstName}}</td>
         <td>{{item.lastName}}</td>
         <td>{{item.gender | gender}}</td>
