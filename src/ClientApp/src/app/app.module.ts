@@ -23,9 +23,9 @@ import { CountryNamePipe } from './country-name.pipe';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'Contact/Add', pathMatch: 'full' },
-      { path: 'Contact/Add', component: ContactFormComponent, pathMatch: 'full' },
-      { path: 'Contact', component: ContactListComponent, pathMatch: 'full' },
+      { path: '', redirectTo: 'AddContact', pathMatch: 'full' },
+      { path: 'AddContact', component: ContactFormComponent, pathMatch: 'full' },
+      { path: 'ContactList', component: ContactListComponent, pathMatch: 'full' },
     ])
   ],
   providers: [],
