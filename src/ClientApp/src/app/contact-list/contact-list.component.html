@@ -1,0 +1,29 @@
+<div class="component pt-4">
+
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th>Country</th>
+        <th>Is Student</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of contacts">
+        <td>{{item.firstName}}</td>
+        <td>{{item.lastName}}</td>
+        <td>{{item.gender | gender}}</td>
+        <td>{{item.dateOfBirth | date: 'dd.MM.yyyy'}}</td>
+        <td>{{item.countryCode | countryName | async }}</td>
+        <td>
+          <div class="text-center">
+            <input type="checkbox" [checked]="item.isStudent" disabled readonly />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

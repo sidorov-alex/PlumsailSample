@@ -10,7 +10,11 @@ export class ContactService {
 
   constructor(private http: HttpClient) { }
 
-  addContact(contact: Contact) : Observable<Contact> {
+  addContact(contact: Contact): Observable<Contact> {
     return this.http.post<Contact>('/api/contact', contact);
+  }
+
+  getList(): Observable<Contact[]> {
+    return this.http.get<Contact[]>('api/contact');
   }
 }
