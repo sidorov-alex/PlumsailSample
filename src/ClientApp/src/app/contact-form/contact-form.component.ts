@@ -12,13 +12,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ContactFormComponent implements OnInit {
 
-  private model: Contact = new Contact();
+  model: Contact = new Contact();
 
-  private countries: Observable<Country[]>;
+  countries: Observable<Country[]>;
 
   constructor(private countriesService: CountriesService, private contactService: ContactService, private route: ActivatedRoute) { }
 
-  private submitForm(form: NgForm) {
+  submitForm(form: NgForm) {
     if (!form.valid) {
       return false;
     }

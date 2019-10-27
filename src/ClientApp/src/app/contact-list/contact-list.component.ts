@@ -12,7 +12,7 @@ export class ContactListComponent implements OnInit {
 
   private contacts: Contact[];
 
-  private filteredContacts: Contact[];
+  filteredContacts: Contact[];
 
   constructor(private contactService: ContactService, private router: Router) { }
 
@@ -27,7 +27,7 @@ export class ContactListComponent implements OnInit {
       });
   }
 
-  private onSearchChange(searchText: string): void {
+  onSearchChange(searchText: string): void {
 
     // Bring search text and values to lower for case-insensitive compare.
 
