@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Contact } from './contact';
+import { retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,14 @@ export class ContactService {
 
   addContact(contact: Contact): Observable<Contact> {
     return this.http.post<Contact>('/api/contact', contact);
+  }
+
+  editContact(contact: Contact) {
+    return this.http.put('api/contact/' + contact.id, contact);
+  }
+
+  get(id: number): Observable<Contact> {
+    return this.http.get<Contact>('api/contact/' + id);
   }
 
   getList(): Observable<Contact[]> {

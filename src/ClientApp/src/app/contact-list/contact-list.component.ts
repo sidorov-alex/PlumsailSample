@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from 'src/app/contact.service';
 import { Contact } from '../contact';
-import { filter } from 'rxjs/operators';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-contact-list',
@@ -14,7 +14,7 @@ export class ContactListComponent implements OnInit {
 
   private filteredContacts: Contact[];
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService, private router: Router) { }
 
   ngOnInit() {
 
@@ -39,6 +39,10 @@ export class ContactListComponent implements OnInit {
       return item.firstName.toLowerCase().indexOf(searchText) != -1 ||
              item.lastName.toLowerCase().indexOf(searchText) != -1;
     });
+  }
+
+  private onEditClick(item: Contact) {
+    this.router.navigate(['/EditContact', item.id]);
   }
 
   private onDeleteClick(item: Contact) {

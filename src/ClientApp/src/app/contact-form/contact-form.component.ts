@@ -4,6 +4,7 @@ import { Contact } from 'src/app/contact';
 import { Observable } from 'rxjs';
 import { CountriesService, Country } from 'src/app/countries.service';
 import { ContactService } from 'src/app/contact.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class ContactFormComponent implements OnInit {
 
   private countries: Observable<Country[]>;
 
-  constructor(private countriesService: CountriesService, private contactService: ContactService) { }
+  constructor(private countriesService: CountriesService, private contactService: ContactService, private route: ActivatedRoute) { }
 
   private submitForm(form: NgForm) {
     if (!form.valid) {
@@ -23,16 +24,26 @@ export class ContactFormComponent implements OnInit {
     }
     else {
 
-      // Send request to add contact.
+      if (this.model.id) {
 
-      this.contactService.addContact(this.model)
-        .subscribe(item => {
+        // Send request to edit contact.
 
-          // Reset the fields.
+        this.contactService.editContact(this.model)
+          .subscribe();
+      }
+      else {
 
-          this.model = new Contact()
-          form.onReset();
-        });
+        // Send request to add contact.
+
+        this.contactService.addContact(this.model)
+          .subscribe(item => {
+
+            // Reset the fields.
+
+            this.model = new Contact()
+            form.onReset();
+          });
+      }
     }
   }
 
@@ -41,6 +52,14 @@ export class ContactFormComponent implements OnInit {
     // Get list of countries for combobox.
 
     this.countries = this.countriesService.getList();
+
+    this.route.paramMap.subscribe(params => {
+      if (params.has('id')) {
+        let id = +params.get('id');
+
+        this.contactService.get(id).subscribe(item => this.model = item);
+      }
+    })
   }
 
 }

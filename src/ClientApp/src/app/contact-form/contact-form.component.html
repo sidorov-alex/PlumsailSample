@@ -21,11 +21,11 @@
     <!-- Gender -->
     <div class="form-group">
       <div class="custom-control custom-radio">
-        <input id="male" type="radio" class="custom-control-input" value="1" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
+        <input id="male" type="radio" class="custom-control-input" [value]="1" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
         <label class="custom-control-label" for="male">Male</label>
       </div>
       <div class="custom-control custom-radio">
-        <input id="female" type="radio" class="custom-control-input" value="0" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
+        <input id="female" type="radio" class="custom-control-input" [value]="0" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
         <label class="custom-control-label" for="female">Female</label>
       </div>
       <div *ngIf="contactForm.submitted && gender.invalid" class="invalid-feedback d-block">
@@ -36,7 +36,7 @@
     <!-- Date of Birth -->
     <div class="form-group">
       <label for="dateOfBirth">Date of Birth:</label>
-      <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="model.dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" [ngClass]="{ 'is-invalid': contactForm.submitted && dateOfBirth.invalid }" required />
+      <input type="date" class="form-control" id="dateOfBirth" [ngModel]="model.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="model.dateOfBirth = $event" name="dateOfBirth" #dateOfBirth="ngModel" [ngClass]="{ 'is-invalid': contactForm.submitted && dateOfBirth.invalid }" required />
       <div *ngIf="contactForm.submitted && dateOfBirth.invalid" class="invalid-feedback">
         <div *ngIf="dateOfBirth.errors.required">Date of Birth is required</div>
       </div>
@@ -61,6 +61,6 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Add</button> <!--[disabled]="!contactForm.form.valid"-->
+    <button type="submit" class="btn btn-primary">Save</button>
 </form>
 </div>

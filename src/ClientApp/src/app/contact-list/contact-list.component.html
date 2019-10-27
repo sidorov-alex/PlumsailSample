@@ -33,7 +33,8 @@
         </td>
         <td>
           <div class="text-center">
-            <button type="button" class="btn btn-sm btn-danger" (click)="onDeleteClick(item)">Delete</button>
+            <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/EditContact', item.id]">Edit</button>
+            <button type="button" class="btn btn-sm btn-danger ml-2" (click)="onDeleteClick(item)">Delete</button>
           </div>
         </td>
       </tr>
