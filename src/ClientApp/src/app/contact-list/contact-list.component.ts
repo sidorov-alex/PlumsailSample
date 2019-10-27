@@ -40,4 +40,24 @@ export class ContactListComponent implements OnInit {
              item.lastName.toLowerCase().indexOf(searchText) != -1;
     });
   }
+
+  private onDeleteClick(item: Contact) {
+    this.contactService.delete(item.id).subscribe(
+      () => this.removeItem(item)
+    )
+  }
+
+  private removeItem(item: Contact) {
+    for (var i = 0; i < this.contacts.length; i++) {
+      if (this.contacts[i] === item) {
+        this.contacts.splice(i, 1);
+      }
+    }
+
+    for (var i = 0; i < this.filteredContacts.length; i++) {
+      if (this.filteredContacts[i] === item) {
+        this.filteredContacts.splice(i, 1);
+      }
+    }
+  }
 }

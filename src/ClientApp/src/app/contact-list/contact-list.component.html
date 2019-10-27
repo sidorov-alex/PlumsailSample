@@ -16,6 +16,7 @@
         <th>Date of Birth</th>
         <th>Country</th>
         <th>Is Student</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -28,6 +29,11 @@
         <td>
           <div class="text-center">
             <input type="checkbox" [checked]="item.isStudent" disabled readonly />
+          </div>
+        </td>
+        <td>
+          <div class="text-center">
+            <button type="button" class="btn btn-sm btn-danger" (click)="onDeleteClick(item)">Delete</button>
           </div>
         </td>
       </tr>
