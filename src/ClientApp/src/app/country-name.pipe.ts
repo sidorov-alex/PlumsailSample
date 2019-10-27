@@ -11,6 +11,9 @@ export class CountryNamePipe implements PipeTransform {
   constructor(private countriesService: CountriesService) { }
 
   transform(code: string): Observable<string> {
+
+    // Search country name by code.
+
     return this.countriesService.getList().pipe(
       map (list => {
         for (let i = 0; i < list.length; i++) {

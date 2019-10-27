@@ -10,11 +10,16 @@ import { filter } from 'rxjs/operators';
 })
 export class ContactListComponent implements OnInit {
 
-  contacts: Contact[];
+  private contacts: Contact[];
+
+  private filteredContacts: Contact[];
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
+
+    // Request contacts list.
+
     this.contactService.getList()
       .subscribe(list => {
         this.contacts = list;
@@ -22,14 +27,17 @@ export class ContactListComponent implements OnInit {
       });
   }
 
-  onSearchChange(searchText: string): void {
+  private onSearchChange(searchText: string): void {
+
+    // Bring search text and values to lower for case-insensitive compare.
+
     searchText = searchText.toLowerCase();
+
+    // Filter by First or Last Name.
 
     this.filteredContacts = this.contacts.filter(item => {
       return item.firstName.toLowerCase().indexOf(searchText) != -1 ||
              item.lastName.toLowerCase().indexOf(searchText) != -1;
     });
   }
-
-  filteredContacts: Contact[];
 }

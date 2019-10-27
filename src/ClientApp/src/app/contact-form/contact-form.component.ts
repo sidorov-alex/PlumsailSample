@@ -11,18 +11,25 @@ import { ContactService } from 'src/app/contact.service';
 })
 export class ContactFormComponent implements OnInit {
 
-  model: Contact = new Contact();
+  private model: Contact = new Contact();
 
-  countries: Observable<Country[]>;
+  private countries: Observable<Country[]>;
 
   constructor(private countriesService: CountriesService, private contactService: ContactService) { }
 
-  submitForm(form: NgForm) {
+  private submitForm(form: NgForm) {
     if (!form.valid) {
       return false;
-    } else {
+    }
+    else {
+
+      // Send request to add contact.
+
       this.contactService.addContact(this.model)
         .subscribe(item => {
+
+          // Reset the fields.
+
           this.model = new Contact()
           form.onReset();
         });
@@ -30,11 +37,10 @@ export class ContactFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.countries = this.getCountries();
-  }
 
-  private getCountries(): Observable<Country[]> {
-    return this.countriesService.getList();
+    // Get list of countries for combobox.
+
+    this.countries = this.countriesService.getList();
   }
 
 }

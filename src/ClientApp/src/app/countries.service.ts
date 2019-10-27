@@ -15,7 +15,10 @@ export class CountriesService {
   getList(): Observable<Country[]> {
 
     if (!this.list) {
+
       this.list = this.http.get<Country[]>('/assets/countries.json').pipe(
+
+        // Cache last one request to not to send new request each time.
         shareReplay(1)
       );
     }
