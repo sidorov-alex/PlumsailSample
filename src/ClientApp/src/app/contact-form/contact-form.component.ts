@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Contact } from 'src/app/contact';
 import { Observable } from 'rxjs';
 import { CountriesService, Country } from 'src/app/countries.service';
+import { ContactService } from 'src/app/contact.service';
 
 @Component({
   selector: 'app-home',
@@ -14,16 +15,17 @@ export class ContactFormComponent implements OnInit {
 
   countries: Observable<Country[]>;
 
-  isSubmitted = false;
-
-  constructor(private countriesService: CountriesService) { }
+  constructor(private countriesService: CountriesService, private contactService: ContactService) { }
 
   submitForm(form: NgForm) {
-    this.isSubmitted = true;
     if (!form.valid) {
       return false;
     } else {
-      alert(JSON.stringify(form.value))
+      this.contactService.addContact(this.model)
+        .subscribe(item => {
+          this.model = new Contact()
+          form.onReset();
+        });
     }
   }
 
