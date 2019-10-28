@@ -48,11 +48,7 @@ export class ContactListComponent implements OnInit {
   onSearchChange(searchText: string): void {
      this.filteredContacts = this.filterContacts(searchText);
   }
-
-  private onEditClick(item: Contact) {
-    this.router.navigate(['/EditContact', item.id]);
-  }
-
+  
   private onDeleteClick(item: Contact) {
     this.contactService.delete(item.id).subscribe(
       () => this.removeItem(item)
