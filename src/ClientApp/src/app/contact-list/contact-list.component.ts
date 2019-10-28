@@ -49,10 +49,12 @@ export class ContactListComponent implements OnInit {
      this.filteredContacts = this.filterContacts(searchText);
   }
   
-  private onDeleteClick(item: Contact) {
-    this.contactService.delete(item.id).subscribe(
-      () => this.removeItem(item)
-    )
+  onDeleteClick(item: Contact) {
+    if (confirm("Are you sure you want to delete this contact?")) {
+      this.contactService.delete(item.id).subscribe(
+        () => this.removeItem(item)
+      )
+    }
   }
 
   private removeItem(item: Contact) {
