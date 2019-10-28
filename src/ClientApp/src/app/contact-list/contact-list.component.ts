@@ -14,31 +14,39 @@ export class ContactListComponent implements OnInit {
 
   filteredContacts: Contact[];
 
+  searchText: string = "";
+
   constructor(private contactService: ContactService, private router: Router) { }
 
   ngOnInit() {
+    this.refresh();   
+  }
 
-    // Request contacts list.
+  refresh() {
+
+     // Request contacts list.
 
     this.contactService.getList()
       .subscribe(list => {
         this.contacts = list;
-        this.filteredContacts = list;
+        this.filteredContacts = this.filterContacts(this.searchText);
       });
   }
 
-  onSearchChange(searchText: string): void {
-
-    // Bring search text and values to lower for case-insensitive compare.
+  private filterContacts(searchText: string): Contact[] {
 
     searchText = searchText.toLowerCase();
 
     // Filter by First or Last Name.
 
-    this.filteredContacts = this.contacts.filter(item => {
+    return this.contacts.filter(item => {
       return item.firstName.toLowerCase().indexOf(searchText) != -1 ||
-             item.lastName.toLowerCase().indexOf(searchText) != -1;
+        item.lastName.toLowerCase().indexOf(searchText) != -1;
     });
+  }
+
+  onSearchChange(searchText: string): void {
+     this.filteredContacts = this.filterContacts(searchText);
   }
 
   private onEditClick(item: Contact) {

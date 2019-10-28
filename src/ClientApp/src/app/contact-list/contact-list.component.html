@@ -1,13 +1,18 @@
 <div class="component pt-4">
 
   <!-- Search Box -->
-  <div class="form-group has-search">
-    <span class="fa fa-search form-control-feedback"></span>
-    <input type="text" class="form-control" placeholder="Search by name" (input)="onSearchChange($event.target.value)">
+  <div class="d-flex flex-row">
+    <div class="mt-1 ml-1 mr-2">
+      <button type="button" class="btn btn-outline-secondary fa fa-refresh" title="Refresh" (click)="refresh()"></button>
+    </div>
+    <div class="form-group has-search">
+      <span class="fa fa-search form-control-feedback"></span>
+      <input type="text" class="form-control" placeholder="Search by name" (input)="onSearchChange($event.target.value)" [(ngModel)]="searchText">
+    </div>
   </div>
-
+  
   <!-- Table -->
-  <table class="table table-stripped mt-4">
+  <table class="table table-stripped">
     <thead>
       <tr>
         <th>First Name</th>
