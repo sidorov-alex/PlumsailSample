@@ -4,7 +4,7 @@ import { Contact } from 'src/app/contact';
 import { Observable } from 'rxjs';
 import { CountriesService, Country } from 'src/app/countries.service';
 import { ContactService } from 'src/app/contact.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,11 @@ export class ContactFormComponent implements OnInit {
 
   countries: Observable<Country[]>;
 
-  constructor(private countriesService: CountriesService, private contactService: ContactService, private route: ActivatedRoute) { }
+  constructor(
+    private countriesService: CountriesService,
+    private contactService: ContactService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   submitForm(form: NgForm) {
     if (!form.valid) {
@@ -30,6 +34,8 @@ export class ContactFormComponent implements OnInit {
 
         this.contactService.editContact(this.model)
           .subscribe();
+
+        this.router.navigate(['/Contact/List']);
       }
       else {
 
